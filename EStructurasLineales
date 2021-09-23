@@ -1,0 +1,84 @@
+package rando;
+/* Agragar librerias para las funciones*/
+import java.util.Scanner;
+import java.util.Random;  
+
+/*
+ * @author SanchezTejedaJessica
+ */
+public class Programa3 {
+
+ public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random random = new Random(); 
+   /* Declaracion de las variables globales */
+        int tope = 0, opt = 0,c=0;
+        char[] pila = new char[26];
+        char caracter;
+        /* Mostrara el menu de la pantalla principal */
+        do {
+            System.out.println("1 - Llenar\n"
+                    + "2 - Eliminar\n"
+                    + "3 - Mostrar\n"
+                    + "4 - Numeros repetidos\n"
+                    + "5 - Salir\n");
+            switch (opt = sc.nextInt()) {
+             /* El primer menu agrega automaticamente las letras del abecedario a la pila de manera aleatoria */ 
+                case 1: 
+                    for (int i = 0; i < 26; i++) {
+                    char j = (char)(Math.random()*26+'A'); 
+                        if (tope < 26) {
+                            pila[tope] = j;//abc[i];1
+                            j++;
+                            tope++;
+                        } else {
+                            System.out.println("Pila llena....");
+                            break;
+                        }
+                    }
+                    break;
+             /* Segundo menu elimina el ultimo dato agregado */  
+                case 2:
+                    if (tope > 0) {
+                        System.out.println("dato eliminado..." + tope);
+                        //restar unidad a tope, para poder reutilizar la posicion 
+                        tope--;
+                    } else {
+                        System.out.println("no hay elementos para eliminar....");
+                    }
+                    break;
+             /* El menu solo muestra los elementos dentro de la pila */  
+                case 3:
+                    if (tope > 0) {
+                        for (int i = tope - 1; i >= 0; i--) {
+                            System.out.println(" " + pila[i]);
+                        }
+                    }else {
+                        System.out.println("pila vacia....");
+                    }
+                    break;
+            /* El menu realiza la comparacion de los caracteres dentro de la pila y verifica cuales se duplican o aparecen mas de una vez */
+                case 4: 
+                    if (tope > 0) {
+                        for (int i = 0; i < pila.length; i++){
+                          caracter = pila[i];
+                          for (int m = 0; m < pila.length; m++){
+                              if (pila[m] == caracter){
+                                  c++;
+                              }
+                          }
+                        /* la sentencia da como resultado los elementos que esten mas de una vez dentro 
+                          de la pila y pone el numero de veces que se encuentra repetido */ 
+                          if (c>1){  
+                              System.out.println("la letra "+pila[i]+" aparece "+c+" veces.\n");
+                          }          
+                          c = 0;   
+                        }
+                            
+                    }  
+                    
+                    break;
+            }
+        } while (opt != 5);
+    }
+}
