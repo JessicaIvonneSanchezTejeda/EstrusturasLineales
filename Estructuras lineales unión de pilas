@@ -1,0 +1,83 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package union;
+import java.util.Scanner;
+/**
+ *
+ * @author JessicaIvonneSanchezTejeda
+ */
+public class unionpilas  {
+public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tope = 0, opt = 0;
+        System.out.println("Establezca el tamaño de las pilas A,B ");
+        //creacion de las variables 
+        int a = sc.nextInt();
+        int[] pilaA = new int[a];
+        int[] pilaB = new int[a];
+        int[] pilaC = new int[a];
+        //creacion del menu principal
+        do {
+            System.out.println("\n1 - Llenar pilas A y B\n"
+                    + "2 - Mostrar datos en pilas A y B\n"
+                    + "3 - Unir pilas A y B en la pila C  \n"
+                    + "4 - Mostrar pila C\n"
+                    + "5 - Eliminar datos en pilas A y B\n"
+                    + "6 - Salir\n");
+            switch (opt = sc.nextInt()) {
+                case 1:
+                    System.out.println("Pilas a,b llenadas correctamente");
+                    for (int i = 0; i < a; i++) {
+                        //se generan los numeros aletoriamente para las pilas a,b 
+                        pilaA[i] = (char) (Math.random() * 100 + 1); //la pila a con el rango de 1 a 100 unicamente
+                        pilaB[i] = (char) (Math.random() * 100 + 200); //l pila b con el rango de 100 a 200 unicamente 
+                        tope++;
+                    }
+                    break;
+                case 2:
+                    //si hay datos en las pilas a,b los muestra
+                    if (tope > 0) {
+                        System.out.println("\n Datos en pila A");
+                        for (int i = tope - 1; i >= 0; i--) {
+                            System.out.println(" " + pilaA[i]);
+                        }
+                        System.out.println("\n Datos en pila B");
+                        for (int i = tope - 1; i >= 0; i--) {
+                            System.out.println(" " + pilaB[i]);
+                        }
+                    } 
+                    //si no hay datos muestra el siguiente mensaje 
+                    else {
+                        System.out.println("Pilas a,b vacias");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Union de pilas terminada");
+                    //crear variable para guardar los resultados 
+                    int r = 0;
+                    for (int i = tope-1; i >= 0; i--) {
+                        //operacion para crear la pila c
+                        pilaC[r] = pilaA[i]+pilaB[i];
+                        //incremento para ir avanzando de lugar en la pila 
+                        r++;
+                    }
+                    break;
+                case 4:    
+                    //muestra los datos de la pila c
+                    System.out.println("\n Pila C");
+                    for (int i = tope-1; i >= 0; i--) {
+                        System.out.println(" " + pilaC[i]);
+                    }
+                    break;
+                case 5:    
+                    // establecer tope=0 para vaciar las pilas
+                    System.out.println("Datos de pilas a,b eliminados");
+                    tope = 0;
+                    break;
+            }
+        } while (opt != 6);
+    }
+}
